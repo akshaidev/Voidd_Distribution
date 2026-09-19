@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>void'd — Newton's Portal, Stripped of Bloat</title>
-  <meta name="description" content="Sub-second attendance tracking and portal telemetry for Newton School students." />
+  <title>void'd — Skip With Confidence. Attend With Purpose.</title>
+  <meta name="description" content="Instant attendance tracking and safe bunk margins for your campus life." />
   <meta name="apple-mobile-web-app-title" content="void'd" />
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -45,16 +45,16 @@
   <nav class="relative z-10 w-full max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <span class="mono text-2xl font-black lowercase tracking-tighter text-[#ff2b55]">void'd</span>
-      <span class="mono text-[10px] tracking-widest uppercase text-white/40 border border-white/10 px-2 py-0.5 rounded-full">
-        v1.0.0
+      <span id="version-badge" class="mono text-[10px] tracking-widest uppercase text-white/40 border border-white/10 px-2 py-0.5 rounded-full">
+        latest
       </span>
     </div>
 
     <!-- Quick Access CTAs -->
     <div class="flex items-center gap-3">
       <a 
-        href="https://github.com/akshaidev/Voidd_Distribution/releases/download/v1/voidd.apk" 
-        class="hidden sm:inline-flex mono text-xs font-semibold px-4 py-2 rounded-xl border border-white/10 hover:border-white/20 text-white/80 hover:text-white transition-all"
+        href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" 
+        class="apk-download-btn hidden sm:inline-flex mono text-xs font-semibold px-4 py-2 rounded-xl border border-white/10 hover:border-white/20 text-white/80 hover:text-white transition-all"
       >
         Get Android APK
       </a>
@@ -74,38 +74,38 @@
     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-8">
       <span class="w-2 h-2 rounded-full bg-[#ff2b55] animate-pulse"></span>
       <span class="mono text-[11px] uppercase tracking-[0.2em] text-white/60">
-        Newton School Attendance Radar
+        Live Attendance & Margin Radar
       </span>
     </div>
 
     <!-- Main Headline -->
     <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] lowercase mb-6">
-      your newton portal,<br />
+      skip with confidence.<br />
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/50">
-        stripped of bloat.
+        attend with purpose.
       </span>
     </h1>
 
     <p class="text-base sm:text-lg text-white/50 max-w-xl font-normal leading-relaxed mb-10">
-      A lightning-fast, zero-overhead student client. View live attendance percentages, bunk safe-margins, and quizzes without clunky web dashboards or portal lag.
+      No sluggish portals, no login fatigue, no mental gymnastics. See your live attendance percentage, track safe bunks down to the class, and stay safely above the cutoff.
     </p>
 
     <!-- Action Buttons -->
     <div class="flex flex-col sm:flex-row items-center gap-4 w-full max-w-md mb-20">
       <a 
         href="https://getvoidd.site" 
-        class="w-full py-4 px-6 rounded-2xl bg-[#ff2b55] hover:bg-[#e02449] text-white font-bold mono text-sm uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(255,43,85,0.25)] flex items-center justify-center gap-2"
+        class="w-full py-4 px-6 rounded-2xl bg-[#ff2b55] hover:bg-[#e02449] text-white font-bold mono text-sm uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(255,43,85,0.25)] flex items-center justify-center gap-2 active:scale-[0.98]"
       >
-        <span>Open Web / iOS PWA</span>
+        <span>Open iOS PWA / Web</span>
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
 
       <a 
-        href="https://github.com/akshaidev/Voidd_Distribution/releases/download/v1/voidd.apk" 
-        class="w-full py-4 px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white font-bold mono text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+        href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" 
+        class="apk-download-btn w-full py-4 px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white font-bold mono text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
       >
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9996.4482.9996.9993.0001.5511-.4485.9997-.9996.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9996.4482.9996.9993 0 .5511-.4485.9997-.9996.9997m11.4045-6.02l1.996-3.4566c.099-.1714.0405-.3897-.1308-.4884-.1713-.099-.3896-.0405-.4886.1308l-2.022 3.5016C15.6586 8.352 13.882 8 12 8c-1.882 0-3.6586.352-5.2319 1.0088L4.7461 5.5072c-.099-.1713-.3173-.2298-.4886-.1308-.1713.0987-.2298.317-.1308.4884l1.996 3.4566C2.6883 11.2339 0 15.0478 0 19.5h24c0-4.4522-2.6883-8.2661-6.1185-10.1786"/></svg>
-        <span>Android APK</span>
+        <span>Download Android APK</span>
       </a>
     </div>
 
@@ -117,12 +117,12 @@
           <div class="w-9 h-9 rounded-xl bg-[#ff2b55]/10 flex items-center justify-center text-[#ff2b55] mono font-bold text-xs">
             01
           </div>
-          <h3 class="font-bold text-base text-white">Attendance Radar</h3>
+          <h3 class="font-bold text-base text-white">Safe Bunk Math</h3>
           <p class="text-xs text-white/50 leading-relaxed font-sans">
-            Tracks exact percentages, mandatory 75% thresholds, and calculates the exact number of classes you can skip or need to attend.
+            Instantly see how many classes you can afford to skip before hitting the red line. Never stress about the 75% threshold again.
           </p>
         </div>
-        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Live Metrics</span>
+        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Calculated Freedom</span>
       </div>
 
       <!-- Feature 2 -->
@@ -131,12 +131,12 @@
           <div class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-white mono font-bold text-xs">
             02
           </div>
-          <h3 class="font-bold text-base text-white">Native & PWA Ready</h3>
+          <h3 class="font-bold text-base text-white">Your Day at a Glance</h3>
           <p class="text-xs text-white/50 leading-relaxed font-sans">
-            Add to Home Screen on iOS with persistent standalone execution, or install the optimized signed APK on Android.
+            The schedule you care about, organized in a clean daily view stripped of portal slowdowns, spinners, and broken layouts.
           </p>
         </div>
-        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Cross-Platform</span>
+        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Live Timetable</span>
       </div>
 
       <!-- Feature 3 -->
@@ -145,12 +145,12 @@
           <div class="w-9 h-9 rounded-xl bg-[#ff2b55]/10 flex items-center justify-center text-[#ff2b55] mono font-bold text-xs">
             03
           </div>
-          <h3 class="font-bold text-base text-white">Sub-Second Dispatch</h3>
+          <h3 class="font-bold text-base text-white">Zero Friction</h3>
           <p class="text-xs text-white/50 leading-relaxed font-sans">
-            Direct headless authentication delivers OTPs instantly without running heavy browser DOMs on mobile clients.
+            Built for speed. Open the app, check your numbers in two seconds, and get right back to your day with session memory that stays logged in.
           </p>
         </div>
-        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Zero Latency</span>
+        <span class="mono text-[10px] text-white/30 uppercase tracking-wider">Instant Peace of Mind</span>
       </div>
     </div>
   </main>
@@ -158,12 +158,43 @@
   <!-- Minimal Footer -->
   <footer class="relative z-10 border-t border-white/5 py-8 text-center">
     <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <span class="mono text-xs text-white/40">void'd // student client</span>
+      <span class="mono text-xs text-white/40">void'd // built for campus life</span>
       <div class="flex items-center gap-6 mono text-xs text-white/40">
         <a href="https://getvoidd.site" class="hover:text-white transition-colors">web client</a>
-        <a href="https://github.com/akshaidev/Voidd_Distribution/releases/download/v1/voidd.apk" class="hover:text-white transition-colors">android apk</a>
+        <a href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" class="apk-download-btn hover:text-white transition-colors">android apk</a>
       </div>
     </div>
   </footer>
+
+  <!-- Script: Auto-resolve latest APK download URL from GitHub Releases -->
+  <script>
+    (function () {
+      const REPO = 'akshaidev/Voidd_Distribution';
+      const apkButtons = document.querySelectorAll('.apk-download-btn');
+      const versionBadge = document.getElementById('version-badge');
+
+      fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to fetch release');
+          return res.json();
+        })
+        .then((data) => {
+          // Find the APK file asset dynamically regardless of version naming
+          const apkAsset = data.assets && data.assets.find((a) => a.name.toLowerCase().endsWith('.apk'));
+          if (apkAsset && apkAsset.browser_download_url) {
+            apkButtons.forEach((btn) => {
+              btn.href = apkAsset.browser_download_url;
+            });
+          }
+
+          if (versionBadge && data.tag_name) {
+            versionBadge.textContent = data.tag_name;
+          }
+        })
+        .catch((err) => {
+          console.warn('Could not auto-fetch latest APK, falling back to release page.', err);
+        });
+    })();
+  </script>
 </body>
 </html>
