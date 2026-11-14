@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>void'd — Instant Newton Portal Attendance & Timetable</title>
-  <meta name="description" content="Log in once to automatically sync your live Newton Portal attendance, batch timetable, and safe bunk margins." />
+  <title>void'd — Newton Portal Attendance, Bunk Math & Timetable</title>
+  <meta name="description" content="Log in once. void'd syncs your live Newton Portal attendance, batch timetable and exact safe-bunk margins to your phone." />
   <meta name="apple-mobile-web-app-title" content="void'd" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#14213D" />
+  <link rel="canonical" href="https://getvoidd.site" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="void'd — Skip with confidence. Synced with Newton." />
+  <meta property="og:description" content="Live Newton Portal attendance, exact safe-bunk math and your batch timetable, on your phone." />
+  <meta property="og:url" content="https://getvoidd.site" />
+  <meta name="twitter:card" content="summary" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,227 +23,283 @@
   <style>
     :root {
       --navy: #14213D;
+      --navy-2: #1B2B4E;
       --cream: #F4EDE0;
       --coral: #FF6B5B;
+      --line: rgba(244, 237, 224, .15);
     }
-
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    * { -webkit-tap-highlight-color: transparent; }
     body {
+      margin: 0;
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--navy);
+      background: var(--navy);
       color: var(--cream);
       font-size: 16px;
-      line-height: 1.5;
-      margin: 0;
-      padding: 0;
+      line-height: 1.55;
       overflow-x: hidden;
     }
+    ::selection { background: var(--coral); color: var(--navy); }
+    a { color: inherit; text-decoration: none; }
+    .display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; line-height: 1.04; letter-spacing: -.02em; margin: 0; }
+    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
-    .font-display {
-      font-family: 'Instrument Serif', Georgia, serif;
-      line-height: 1.04;
-      letter-spacing: -0.02em;
-      font-optical-sizing: auto;
-    }
+    /* Header */
+    header .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; padding-bottom: 8px; }
+    .logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 2rem; letter-spacing: -.02em; min-height: 44px; display: inline-flex; align-items: center; }
+    .logo span { color: var(--coral); }
+    nav { display: flex; gap: 22px; font-weight: 500; font-size: 15px; color: rgba(244,237,224,.8); }
+    nav a { min-height: 44px; display: inline-flex; align-items: center; transition: color .15s; }
+    nav a:hover { color: var(--cream); }
+    nav a.accent { color: var(--coral); font-weight: 600; }
 
-    /* Instant pointer-down response per Apple fluid interface design */
-    .pressable {
-      transition: transform 100ms ease-out, opacity 120ms ease-out;
-      will-change: transform;
-    }
-    .pressable:active {
-      transform: scale(0.97);
-    }
+    /* Hero */
+    .hero { display: grid; gap: 44px; padding-top: 40px; padding-bottom: 72px; align-items: center; }
+    h1.display { font-size: clamp(2.75rem, 9vw, 4.75rem); }
+    h1 em { color: var(--coral); }
+    .lede { font-size: 1.125rem; color: rgba(244,237,224,.85); max-width: 34rem; margin: 22px 0 0; }
+    .lede strong { color: var(--cream); font-weight: 600; }
 
-    /* High-contrast accessible focus ring */
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--coral);
-      outline-offset: 4px;
+    .ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; max-width: 28rem; }
+    .btn {
+      min-height: 54px; padding: 14px 22px; border-radius: 16px; font-weight: 700; font-size: 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      transition: transform 100ms ease-out, background .15s, border-color .15s;
     }
+    .btn:active { transform: scale(.97); }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .btn-primary { background: var(--coral); color: var(--navy); }
+    .btn-primary:hover { background: #ff7d6f; }
+    .btn-ghost { border: 1.5px solid rgba(244,237,224,.35); color: var(--cream); }
+    .btn-ghost:hover { border-color: var(--cream); }
+    .meta { margin: 16px 0 0; font-size: 14px; color: rgba(244,237,224,.65); }
+    .meta b { color: var(--coral); font-weight: 600; }
+    .ios-tip { margin: 6px 0 0; font-size: 14px; color: rgba(244,237,224,.65); }
 
+    /* Demo card */
+    .demo { background: var(--cream); color: var(--navy); border-radius: 28px; padding: 24px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); }
+    .demo-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(20,33,61,.6); }
+    .pill { background: var(--navy); color: var(--cream); border-radius: 999px; padding: 4px 10px; letter-spacing: .04em; }
+    .course { margin: 14px 0 0; font-size: 1.5rem; }
+    .pct { font-family: 'Instrument Serif', Georgia, serif; font-size: 4.25rem; line-height: 1; letter-spacing: -.03em; margin: 8px 0 0; }
+    .bar { position: relative; height: 10px; border-radius: 999px; background: rgba(20,33,61,.12); margin: 14px 0 0; }
+    .bar-fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--navy); width: 0; transition: width .25s ease, background .25s; }
+    .bar-fill.low { background: var(--coral); }
+    .bar-mark { position: absolute; top: -5px; bottom: -5px; left: 75%; width: 2px; background: var(--navy); opacity: .55; }
+    .bar-mark::after { content: '75%'; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 700; opacity: .7; }
+    .verdict { margin: 34px 0 0; padding: 14px 16px; border-radius: 14px; background: rgba(20,33,61,.07); font-weight: 600; min-height: 56px; display: flex; align-items: center; }
+    .verdict.low { background: rgba(255,107,91,.18); }
+    .sliders { margin-top: 18px; display: grid; gap: 14px; }
+    .sliders label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: rgba(20,33,61,.75); }
+    input[type=range] { width: 100%; accent-color: var(--coral); height: 28px; margin: 2px 0 0; }
+    .demo-note { margin: 14px 0 0; font-size: 12px; color: rgba(20,33,61,.55); }
+
+    /* Sections */
+    section.block { padding: 72px 0; border-top: 1px solid var(--line); }
+    h2.display { font-size: clamp(2rem, 6vw, 3rem); }
+    .steps { display: grid; gap: 28px; margin-top: 36px; padding: 0; list-style: none; }
+    .steps li { display: flex; gap: 18px; align-items: baseline; }
+    .num { color: var(--coral); font-weight: 700; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .steps h3, .feat h3 { margin: 0 0 4px; font-size: 1.0625rem; font-weight: 700; }
+    .steps p, .feat p { margin: 0; color: rgba(244,237,224,.78); }
+
+    .features { display: grid; gap: 0; margin-top: 36px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .feat { display: flex; gap: 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+
+    .callout { background: var(--cream); color: var(--navy); border-radius: 28px; padding: 32px 26px; margin: 0 0 72px; }
+    .callout h2 { color: var(--navy); }
+    .callout p { margin: 14px 0 0; max-width: 40rem; color: rgba(20,33,61,.85); }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 15px; color: rgba(244,237,224,.7); }
+    footer .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+    footer .links { display: flex; justify-content: center; gap: 24px; }
+    footer a { min-height: 44px; display: inline-flex; align-items: center; transition: color .15s; }
+    footer a:hover { color: var(--coral); }
+
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
+
+    @media (min-width: 768px) {
+      .hero { grid-template-columns: 1.1fr .9fr; gap: 56px; padding-top: 64px; }
+      .ctas { flex-direction: row; max-width: none; }
+      .btn { flex: 1; justify-content: center; }
+      .features { grid-template-columns: 1fr 1fr; column-gap: 48px; }
+      .steps { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+      .steps li { flex-direction: column; gap: 6px; }
+      .callout { padding: 48px; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 120ms !important;
-        scroll-behavior: auto !important;
-      }
-      .pressable:active {
-        transform: none !important;
-        opacity: 0.85;
-      }
+      *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; scroll-behavior: auto !important; }
+      .btn:active { transform: none; opacity: .85; }
     }
   </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between selection:bg-[#FF6B5B] selection:text-[#14213D]">
-
-  <!-- Top Navigation -->
-  <header class="w-full max-w-2xl mx-auto px-5 pt-6 pb-4 flex items-center justify-between">
-    <a href="#" class="font-display text-3xl sm:text-4xl tracking-tight text-[#F4EDE0] inline-flex items-center min-h-[44px]">
-      void’d<span class="text-[#FF6B5B]">.</span>
-    </a>
-
-    <nav aria-label="Primary navigation" class="flex items-center gap-5 text-base font-medium text-[#F4EDE0]/80">
-      <a href="#features" class="hover:text-[#F4EDE0] transition-colors min-h-[44px] inline-flex items-center">
-        Features
-      </a>
-      <a href="https://getvoidd.site" class="text-[#FF6B5B] font-semibold hover:opacity-90 transition-opacity min-h-[44px] inline-flex items-center">
-        Web App
-      </a>
-    </nav>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="#" class="logo" aria-label="void'd home">void’d<span>.</span></a>
+      <nav aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="https://getvoidd.site" class="accent">Web App</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main Content (Mobile-First Editorial Layout) -->
-  <main class="w-full max-w-2xl mx-auto px-5 pt-8 pb-16 space-y-14">
+  <main>
+    <div class="wrap hero">
+      <div>
+        <h1 class="display">
+          Skip with confidence.<br />
+          <em>Synced with Newton.</em>
+        </h1>
+        <p class="lede">
+          Log in once and <strong>void’d syncs your Newton Portal</strong>: live lecture counts, enrolled courses and attendance percentages, with the exact number of classes you can safely skip.
+        </p>
 
-    <!-- Hero Section -->
-    <section aria-labelledby="hero-heading" class="space-y-6">
-      <h1 id="hero-heading" class="font-display text-[2.75rem] sm:text-6xl font-normal text-[#F4EDE0]">
-        Skip with confidence.<br />
-        <span class="italic text-[#FF6B5B]">Synced with Newton.</span>
-      </h1>
-
-      <p class="text-base sm:text-lg text-[#F4EDE0]/85 leading-relaxed max-w-xl">
-        Log in once and <strong class="font-semibold text-[#F4EDE0]">void’d automatically syncs with your Newton Portal</strong>—pulling live lecture counts, enrolled courses, and attendance percentages straight to your phone.
-      </p>
-
-      <!-- Primary Action Buttons (10% Coral Accent) -->
-      <div class="pt-2 flex flex-col sm:flex-row gap-3.5 w-full">
-        <a
-          href="https://getvoidd.site"
-          class="pressable w-full sm:flex-1 min-h-[54px] px-6 py-3.5 rounded-2xl bg-[#FF6B5B] text-[#14213D] font-bold text-base flex items-center justify-between sm:justify-center gap-3"
-        >
-          <span>Launch Web App for iOS</span>
-          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16" />
-          </svg>
-        </a>
-
-        <a
-          href="https://github.com/akshaidev/Voidd_Distribution/releases/latest"
-          class="apk-download-btn pressable w-full sm:flex-1 min-h-[54px] px-6 py-3.5 rounded-2xl bg-[#FF6B5B] text-[#14213D] font-bold text-base flex items-center justify-between sm:justify-center gap-3"
-        >
-          <span>Download APK for Android</span>
-          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
-          </svg>
-        </a>
+        <div class="ctas">
+          <a href="https://getvoidd.site" class="btn btn-primary">
+            <span>Launch Web App for iOS</span>
+            <svg fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16" /></svg>
+          </a>
+          <a href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" class="btn btn-ghost apk-download-btn" rel="noopener">
+            <span>Download APK for Android</span>
+            <svg fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" /></svg>
+          </a>
+        </div>
+        <p class="ios-tip">On iPhone: open in Safari, tap Share, then Add to Home Screen.</p>
+        <p class="meta">Latest release <b id="version-badge">v7.9</b></p>
       </div>
 
-      <p class="text-base text-[#F4EDE0]/70">
-        Instant post-login Newton sync · Latest release <span id="version-badge" class="text-[#FF6B5B] font-semibold">v7.9</span>
-      </p>
+      <!-- Live bunk-math demo -->
+      <aside class="demo" aria-label="Interactive bunk calculator demo">
+        <div class="demo-top"><span>Attendance</span><span class="pill">Live demo</span></div>
+        <h2 class="display course">Data Structures</h2>
+        <p class="pct" id="pct" aria-live="polite">80.0%</p>
+        <div class="bar" aria-hidden="true">
+          <div class="bar-fill" id="fill"></div>
+          <div class="bar-mark"></div>
+        </div>
+        <p class="verdict" id="verdict" aria-live="polite"></p>
+
+        <div class="sliders">
+          <div>
+            <label for="total"><span>Lectures held</span><span id="total-out">40</span></label>
+            <input type="range" id="total" min="4" max="80" value="40" />
+          </div>
+          <div>
+            <label for="attended"><span>Lectures attended</span><span id="att-out">32</span></label>
+            <input type="range" id="attended" min="0" max="40" value="32" />
+          </div>
+        </div>
+        <p class="demo-note">Sample numbers. Drag to see how the 75% math works. Your real counts come from Newton.</p>
+      </aside>
+    </div>
+
+    <div class="wrap">
+      <section class="callout" aria-labelledby="sync-heading">
+        <h2 id="sync-heading" class="display">Direct Newton Portal sync, right after login.</h2>
+        <p>No manual attendance entry. Sign in with your campus account and void’d fetches your live Newton Portal records on every pull-to-refresh, keeping your session signed in.</p>
+      </section>
+    </div>
+
+    <section id="how" class="block" aria-labelledby="how-heading">
+      <div class="wrap">
+        <h2 id="how-heading" class="display">Three steps. Then it runs itself.</h2>
+        <ol class="steps">
+          <li><span class="num">01</span><div><h3>Sign in</h3><p>Use your campus account once. Your session stays signed in.</p></div></li>
+          <li><span class="num">02</span><div><h3>Pull to refresh</h3><p>Courses, lecture counts and attendance sync straight from Newton.</p></div></li>
+          <li><span class="num">03</span><div><h3>Know your margin</h3><p>See exactly how many classes you can skip, or must attend, to stay at 75%.</p></div></li>
+        </ol>
+      </div>
     </section>
 
-    <!-- Post-Login Newton Sync Callout (Solid Cream Color Field — 90% Palette) -->
-    <section aria-labelledby="sync-heading" class="bg-[#F4EDE0] text-[#14213D] rounded-3xl p-6 sm:p-8 space-y-3">
-      <h2 id="sync-heading" class="font-display text-3xl sm:text-4xl font-normal text-[#14213D]">
-        Direct Newton Portal sync, right after login.
-      </h2>
-      <p class="text-base text-[#14213D]/85 leading-relaxed">
-        No manual attendance entry. Sign in with your campus account and void’d fetches your live Newton Portal records on every pull-to-refresh while keeping your session signed in.
-      </p>
+    <section id="features" class="block" aria-labelledby="features-heading">
+      <div class="wrap">
+        <h2 id="features-heading" class="display">Built for every lecture.</h2>
+        <ul class="features">
+          <li class="feat"><span class="num">01</span><div><h3>Post-Login Newton Sync</h3><p>Live attendance and course records pulled directly from Newton Portal.</p></div></li>
+          <li class="feat"><span class="num">02</span><div><h3>Exact Safe Bunk Math</h3><p>The precise number of classes you can skip or must attend to hold 75%.</p></div></li>
+          <li class="feat"><span class="num">03</span><div><h3>Theory + Lab Combining</h3><p>Merge linked lecture and lab courses to track their combined 75% cutoff.</p></div></li>
+          <li class="feat"><span class="num">04</span><div><h3>Auto-Mapped Batch Timetables</h3><p>Raw timetable slots linked to your enrolled courses for your section.</p></div></li>
+          <li class="feat"><span class="num">05</span><div><h3>Future Leave Predictor</h3><p>Simulate upcoming absences on the calendar before you skip a class.</p></div></li>
+          <li class="feat"><span class="num">06</span><div><h3>Batch Leaderboard &amp; Incognito</h3><p>Compare attendance across your batch, or opt out anytime for privacy.</p></div></li>
+        </ul>
+      </div>
     </section>
-
-    <!-- Single-Line Features List -->
-    <section id="features" aria-labelledby="features-heading" class="space-y-6">
-      <h2 id="features-heading" class="font-display text-3xl sm:text-4xl font-normal text-[#F4EDE0]">
-        Built for every lecture.
-      </h2>
-
-      <ul class="divide-y divide-[#F4EDE0]/15 border-t border-b border-[#F4EDE0]/15">
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">01</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Post-Login Newton Sync</strong> — Pulls your live attendance and course records directly from Newton Portal after sign-in.
-          </p>
-        </li>
-
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">02</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Exact Safe Bunk Math</strong> — Shows the exact number of classes you can skip or must attend to stay at 75%.
-          </p>
-        </li>
-
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">03</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Theory + Lab Combining</strong> — Merge linked lecture and lab courses to track their combined 75% attendance cutoff.
-          </p>
-        </li>
-
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">04</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Auto-Mapped Batch Timetables</strong> — Links raw timetable slots to your enrolled courses automatically for your section.
-          </p>
-        </li>
-
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">05</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Future Leave Predictor</strong> — Simulate upcoming absences on the calendar before you actually skip a class.
-          </p>
-        </li>
-
-        <li class="py-4 flex items-baseline gap-4">
-          <span class="text-[#FF6B5B] font-bold text-base shrink-0">06</span>
-          <p class="text-base text-[#F4EDE0]">
-            <strong class="font-semibold">Batch Leaderboard &amp; Incognito Mode</strong> — Compare attendance rankings across your batch or opt out anytime for privacy.
-          </p>
-        </li>
-      </ul>
-    </section>
-
   </main>
 
-  <!-- Minimal Footer -->
-  <footer class="w-full max-w-2xl mx-auto px-5 py-8 border-t border-[#F4EDE0]/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-base text-[#F4EDE0]/75">
-    <span>void’d — synced with Newton Portal</span>
-    <div class="flex items-center gap-6">
-      <a href="https://getvoidd.site" class="hover:text-[#FF6B5B] transition-colors min-h-[44px] inline-flex items-center">
-        iOS Web App
-      </a>
-      <a href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" class="apk-download-btn hover:text-[#FF6B5B] transition-colors min-h-[44px] inline-flex items-center">
-        Android APK
-      </a>
+  <footer>
+    <div class="wrap">
+      <span>void’d — synced with Newton Portal</span>
+      <div class="links">
+        <a href="https://getvoidd.site">iOS Web App</a>
+        <a href="https://github.com/akshaidev/Voidd_Distribution/releases/latest" class="apk-download-btn" rel="noopener">Android APK</a>
+      </div>
     </div>
   </footer>
 
-  <!-- Auto-resolve latest APK download URL from GitHub Releases -->
   <script>
+    // Bunk-math demo
     (function () {
-      const REPO = 'akshaidev/Voidd_Distribution';
-      const apkButtons = document.querySelectorAll('.apk-download-btn');
-      const versionBadge = document.getElementById('version-badge');
+      var total = document.getElementById('total');
+      var att = document.getElementById('attended');
+      var totalOut = document.getElementById('total-out');
+      var attOut = document.getElementById('att-out');
+      var pct = document.getElementById('pct');
+      var fill = document.getElementById('fill');
+      var verdict = document.getElementById('verdict');
 
-      fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
-        .then((res) => {
-          if (!res.ok) throw new Error('Failed to fetch release');
-          return res.json();
+      function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+
+      function render() {
+        var t = +total.value;
+        att.max = t;
+        if (+att.value > t) att.value = t;
+        var a = +att.value;
+
+        totalOut.textContent = t;
+        attOut.textContent = a;
+
+        var p = (a / t) * 100;
+        pct.textContent = p.toFixed(1) + '%';
+        fill.style.width = p + '%';
+
+        var low = p < 75;
+        fill.classList.toggle('low', low);
+        verdict.classList.toggle('low', low);
+
+        if (low) {
+          var need = 3 * t - 4 * a; // consecutive lectures to attend to reach 75%
+          verdict.textContent = 'Attend the next ' + plural(need, 'lecture') + ' in a row to get back to 75%.';
+        } else {
+          var skip = Math.floor((4 * a - 3 * t) / 3); // lectures you can miss and stay >= 75%
+          verdict.textContent = skip > 0
+            ? 'You can safely skip ' + plural(skip, 'lecture') + '.'
+            : 'Right on the line. Don’t skip the next one.';
+        }
+      }
+
+      total.addEventListener('input', render);
+      att.addEventListener('input', render);
+      render();
+    })();
+
+    // Resolve latest APK + version from GitHub Releases
+    (function () {
+      var REPO = 'akshaidev/Voidd_Distribution';
+      var buttons = document.querySelectorAll('.apk-download-btn');
+      var badge = document.getElementById('version-badge');
+
+      fetch('https://api.github.com/repos/' + REPO + '/releases/latest')
+        .then(function (r) { if (!r.ok) throw new Error('release fetch failed'); return r.json(); })
+        .then(function (d) {
+          var apk = d.assets && d.assets.find(function (x) { return x.name.toLowerCase().endsWith('.apk'); });
+          if (apk && apk.browser_download_url) buttons.forEach(function (b) { b.href = apk.browser_download_url; });
+          if (badge && d.tag_name) badge.textContent = d.tag_name;
         })
-        .then((data) => {
-          const apkAsset = data.assets && data.assets.find((a) => a.name.toLowerCase().endsWith('.apk'));
-          if (apkAsset && apkAsset.browser_download_url) {
-            apkButtons.forEach((btn) => {
-              btn.href = apkAsset.browser_download_url;
-            });
-          }
-          if (versionBadge && data.tag_name) {
-            versionBadge.textContent = data.tag_name;
-          }
-        })
-        .catch((err) => {
-          console.warn('Could not auto-fetch latest APK, falling back to release page.', err);
-        });
+        .catch(function (e) { console.warn('APK auto-resolve failed; falling back to release page.', e); });
     })();
   </script>
 </body>
